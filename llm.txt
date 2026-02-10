@@ -1,0 +1,57 @@
+# Flutter & UI Best Practices (llm.txt)
+
+This document outlines the coding standards, architectural patterns, and UI design principles to be followed for this project.
+
+## 1. Architectural Pattern
+We will use a **Feature-First** architecture combined with **Riverpod** for state management.
+
+### Directory Structure
+```
+lib/
+├── src/
+│   ├── features/
+│   │   ├── authentication/
+│   │   │   ├── data/ (Repositories, Data Sources)
+│   │   │   ├── domain/ (Models, Entities)
+│   │   │   ├── presentation/ (Widgets, Controllers/Providers)
+│   │   ├── corpus_recording/
+│   │   ├── image_tagging/
+│   ├── common_widgets/ (Reusable UI components)
+│   ├── constants/ (App colors, strings, styles)
+│   ├── utils/ (Helpers, formatters)
+│   ├── routing/ (GoRouter configuration)
+├── main.dart
+```
+
+## 2. State Management (Riverpod)
+- Use `ConsumerWidget` instead of `StatefulWidget` where possible.
+- Use `AsyncValue` to handle loading/error/data states gracefully.
+- Keep business logic in `Notifier` or `AsyncNotifier` classes, separating UI from logic.
+- **Dependency Injection**: Use Riverpod providers to inject repositories into controllers.
+
+## 3. UI Design Principles (Material 3)
+- **Design System**: Strictly adhere to Material 3 guidelines.
+- **Typography**: Use a consistent text theme (Headlines for titles, Body for content).
+- **Colors**: Use a seed-generated `ColorScheme` ensuring dark mode support.
+- **Responsiveness**: Use `LayoutBuilder` or `flex` widgets to ensure layouts work on different screen sizes.
+- **Interactions**: Provide feedback (ripples, snackbars) for every user action.
+- **Accessibility**: Label all buttons and inputs. Use `Semantics` widgets where necessary.
+
+## 4. Coding Standards
+- **Lals Analysis**: Enforce `flutter_lints` or `very_good_analysis`.
+- **Type Safety**: Avoid `dynamic`. Define explicit models using `freezed` or standard Dart classes.
+- **Null Safety**: Embrace null safety; avoid `!` (bang operator) unless absolutely certain. Use `?.` and `??`.
+- **Async/Await**: Prefer `async/await` over raw `.then()` callbacks.
+- **Constants**: Hardcode nothing. Use `AppColors`, `AppStrings`, etc.
+
+## 5. Performance Tips
+- Use `const` constructors for widgets whenever possible.
+- Use `ListView.builder` for long lists.
+- Avoid rebuilding the entire widget tree; scope `Consumer` widgets as small as possible.
+- Optimize images using `cacheWidth`/`cacheHeight` or network caching (`cached_network_image`).
+
+## 6. Specific Libraries
+- **Routing**: `go_router` for declarative routing.
+- **Forms**: `flutter_form_builder` or standard `Form` with validation.
+- **Network**: `dio` or standard `http`.
+- **Local Storage**: `shared_preferences` or `hive` for simple settings.
