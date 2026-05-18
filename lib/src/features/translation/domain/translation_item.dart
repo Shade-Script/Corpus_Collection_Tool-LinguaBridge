@@ -12,8 +12,13 @@ class TranslationItem with _$TranslationItem {
     required String sourceLanguage,
     required String targetLanguage,
     required DateTime timestamp,
+    String? phoneticSpelling,
+    String? contextSentenceOriginal,
+    String? contextSentenceTranslated,
     String? userId,
     String? imageUrl,
+    String? audioUrl,
+    @Default(5) int pointsEarned,
   }) = _TranslationItem;
 
   factory TranslationItem.fromJson(Map<String, dynamic> json) =>

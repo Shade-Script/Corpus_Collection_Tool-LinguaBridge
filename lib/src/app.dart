@@ -11,9 +11,16 @@ class LinguaBridgeApp extends ConsumerWidget {
     return MaterialApp.router(
       routerConfig: goRouter,
       title: 'LinguaBridge',
+      themeMode: ThemeMode.system, // Dynamically swaps between Light and Dark
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
+      ),
+      darkTheme: ThemeData.dark(useMaterial3: true).copyWith(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.deepPurple,
+          brightness: Brightness.dark,
+        ),
       ),
     );
   }

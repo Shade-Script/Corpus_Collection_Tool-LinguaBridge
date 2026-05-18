@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:linguabridge/src/features/translation/domain/translation_item.dart';
 import 'package:linguabridge/src/services/cloudinary_service.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -23,26 +24,68 @@ class TranslationRepository {
         );
   }
 
-  Future<void> addTranslation(TranslationItem item, {String? imagePath}) async {
-    // If an image is provided, upload it first
-    String? finalImageUrl = item.imageUrl;
+  Stream<List<TranslationItem>> watchTranslationsByLanguage(String languageName) {
+    return _firestore
+        .collection('translations')
+        .where('sourceLanguage', isEqualTo: languageName)
+        .snapshots()
+        .map(
+          (snapshot) {
+            final list = snapshot.docs
+                .map((doc) => TranslationItem.fromJson(doc.data()))
+                .toList();
+            // Client-side sort prevents complex Firestore composite index faults
+            list.sort((a, b) => b.timestamp.compareTo(a.timestamp));
+            return list;
+          },
+        );
+  }
 
-    if (imagePath != null) {
-      final uploadedUrl = await _cloudinaryService.uploadImage(imagePath);
-      if (uploadedUrl != null) {
-        finalImageUrl = uploadedUrl;
-      }
+  Future<void> addTranslation(TranslationItem item, {XFile? imageFile, String? audioFilePath}) async {
+    String? finalImageUrl = item.imageUrl;
+    String? finalAudioUrl = item.audioUrl;
+
+    // Upload media in parallel if both exist
+    final uploadTasks = <Future>[];
+
+    if (imageFile != null) {
+      uploadTasks.add(
+        _cloudinaryService.uploadImage(imageFile).then((url) {
+          if (url != null) finalImageUrl = url;
+        })
+      );
     }
 
-    // Create a copy with the image URL if changed
-    final itemToSave = finalImageUrl != item.imageUrl
-        ? item.copyWith(imageUrl: finalImageUrl)
-        : item;
+    if (audioFilePath != null) {
+      uploadTasks.add(
+        _cloudinaryService.uploadAudio(audioFilePath).then((url) {
+          if (url != null) finalAudioUrl = url;
+        })
+      );
+    }
 
-    await _firestore
-        .collection('translations')
-        .doc(item.id)
-        .set(itemToSave.toJson());
+    await Future.wait(uploadTasks);
+
+    // Create a copy with the secure cloud URLs if they exist
+    final itemToSave = item.copyWith(
+      imageUrl: finalImageUrl,
+      audioUrl: finalAudioUrl,
+    );
+
+    // Use a Firestore transaction to write the translation and increment the user's score simultaneously!
+    await _firestore.runTransaction((transaction) async {
+      // 1. Add Translation
+      final translationDoc = _firestore.collection('translations').doc(itemToSave.id);
+      transaction.set(translationDoc, itemToSave.toJson());
+
+      // 2. Increment User's total points securely
+      if (itemToSave.userId != null) {
+        final userDoc = _firestore.collection('users').doc(itemToSave.userId);
+        transaction.set(userDoc, {
+          'totalPoints': FieldValue.increment(itemToSave.pointsEarned),
+        }, SetOptions(merge: true));
+      }
+    });
   }
 }
 
@@ -57,4 +100,9 @@ TranslationRepository translationRepository(TranslationRepositoryRef ref) {
 @riverpod
 Stream<List<TranslationItem>> watchTranslations(WatchTranslationsRef ref) {
   return ref.watch(translationRepositoryProvider).watchTranslations();
+}
+
+@riverpod
+Stream<List<TranslationItem>> watchTranslationsByLanguage(WatchTranslationsByLanguageRef ref, String languageName) {
+  return ref.watch(translationRepositoryProvider).watchTranslationsByLanguage(languageName);
 }

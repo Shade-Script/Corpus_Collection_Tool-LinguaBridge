@@ -27,8 +27,13 @@ mixin _$TranslationItem {
   String get sourceLanguage => throw _privateConstructorUsedError;
   String get targetLanguage => throw _privateConstructorUsedError;
   DateTime get timestamp => throw _privateConstructorUsedError;
+  String? get phoneticSpelling => throw _privateConstructorUsedError;
+  String? get contextSentenceOriginal => throw _privateConstructorUsedError;
+  String? get contextSentenceTranslated => throw _privateConstructorUsedError;
   String? get userId => throw _privateConstructorUsedError;
   String? get imageUrl => throw _privateConstructorUsedError;
+  String? get audioUrl => throw _privateConstructorUsedError;
+  int get pointsEarned => throw _privateConstructorUsedError;
 
   /// Serializes this TranslationItem to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -54,8 +59,13 @@ abstract class $TranslationItemCopyWith<$Res> {
     String sourceLanguage,
     String targetLanguage,
     DateTime timestamp,
+    String? phoneticSpelling,
+    String? contextSentenceOriginal,
+    String? contextSentenceTranslated,
     String? userId,
     String? imageUrl,
+    String? audioUrl,
+    int pointsEarned,
   });
 }
 
@@ -80,8 +90,13 @@ class _$TranslationItemCopyWithImpl<$Res, $Val extends TranslationItem>
     Object? sourceLanguage = null,
     Object? targetLanguage = null,
     Object? timestamp = null,
+    Object? phoneticSpelling = freezed,
+    Object? contextSentenceOriginal = freezed,
+    Object? contextSentenceTranslated = freezed,
     Object? userId = freezed,
     Object? imageUrl = freezed,
+    Object? audioUrl = freezed,
+    Object? pointsEarned = null,
   }) {
     return _then(
       _value.copyWith(
@@ -109,6 +124,18 @@ class _$TranslationItemCopyWithImpl<$Res, $Val extends TranslationItem>
                 ? _value.timestamp
                 : timestamp // ignore: cast_nullable_to_non_nullable
                       as DateTime,
+            phoneticSpelling: freezed == phoneticSpelling
+                ? _value.phoneticSpelling
+                : phoneticSpelling // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            contextSentenceOriginal: freezed == contextSentenceOriginal
+                ? _value.contextSentenceOriginal
+                : contextSentenceOriginal // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            contextSentenceTranslated: freezed == contextSentenceTranslated
+                ? _value.contextSentenceTranslated
+                : contextSentenceTranslated // ignore: cast_nullable_to_non_nullable
+                      as String?,
             userId: freezed == userId
                 ? _value.userId
                 : userId // ignore: cast_nullable_to_non_nullable
@@ -117,6 +144,14 @@ class _$TranslationItemCopyWithImpl<$Res, $Val extends TranslationItem>
                 ? _value.imageUrl
                 : imageUrl // ignore: cast_nullable_to_non_nullable
                       as String?,
+            audioUrl: freezed == audioUrl
+                ? _value.audioUrl
+                : audioUrl // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            pointsEarned: null == pointsEarned
+                ? _value.pointsEarned
+                : pointsEarned // ignore: cast_nullable_to_non_nullable
+                      as int,
           )
           as $Val,
     );
@@ -139,8 +174,13 @@ abstract class _$$TranslationItemImplCopyWith<$Res>
     String sourceLanguage,
     String targetLanguage,
     DateTime timestamp,
+    String? phoneticSpelling,
+    String? contextSentenceOriginal,
+    String? contextSentenceTranslated,
     String? userId,
     String? imageUrl,
+    String? audioUrl,
+    int pointsEarned,
   });
 }
 
@@ -164,8 +204,13 @@ class __$$TranslationItemImplCopyWithImpl<$Res>
     Object? sourceLanguage = null,
     Object? targetLanguage = null,
     Object? timestamp = null,
+    Object? phoneticSpelling = freezed,
+    Object? contextSentenceOriginal = freezed,
+    Object? contextSentenceTranslated = freezed,
     Object? userId = freezed,
     Object? imageUrl = freezed,
+    Object? audioUrl = freezed,
+    Object? pointsEarned = null,
   }) {
     return _then(
       _$TranslationItemImpl(
@@ -193,6 +238,18 @@ class __$$TranslationItemImplCopyWithImpl<$Res>
             ? _value.timestamp
             : timestamp // ignore: cast_nullable_to_non_nullable
                   as DateTime,
+        phoneticSpelling: freezed == phoneticSpelling
+            ? _value.phoneticSpelling
+            : phoneticSpelling // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        contextSentenceOriginal: freezed == contextSentenceOriginal
+            ? _value.contextSentenceOriginal
+            : contextSentenceOriginal // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        contextSentenceTranslated: freezed == contextSentenceTranslated
+            ? _value.contextSentenceTranslated
+            : contextSentenceTranslated // ignore: cast_nullable_to_non_nullable
+                  as String?,
         userId: freezed == userId
             ? _value.userId
             : userId // ignore: cast_nullable_to_non_nullable
@@ -201,6 +258,14 @@ class __$$TranslationItemImplCopyWithImpl<$Res>
             ? _value.imageUrl
             : imageUrl // ignore: cast_nullable_to_non_nullable
                   as String?,
+        audioUrl: freezed == audioUrl
+            ? _value.audioUrl
+            : audioUrl // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        pointsEarned: null == pointsEarned
+            ? _value.pointsEarned
+            : pointsEarned // ignore: cast_nullable_to_non_nullable
+                  as int,
       ),
     );
   }
@@ -216,8 +281,13 @@ class _$TranslationItemImpl implements _TranslationItem {
     required this.sourceLanguage,
     required this.targetLanguage,
     required this.timestamp,
+    this.phoneticSpelling,
+    this.contextSentenceOriginal,
+    this.contextSentenceTranslated,
     this.userId,
     this.imageUrl,
+    this.audioUrl,
+    this.pointsEarned = 5,
   });
 
   factory _$TranslationItemImpl.fromJson(Map<String, dynamic> json) =>
@@ -236,13 +306,24 @@ class _$TranslationItemImpl implements _TranslationItem {
   @override
   final DateTime timestamp;
   @override
+  final String? phoneticSpelling;
+  @override
+  final String? contextSentenceOriginal;
+  @override
+  final String? contextSentenceTranslated;
+  @override
   final String? userId;
   @override
   final String? imageUrl;
+  @override
+  final String? audioUrl;
+  @override
+  @JsonKey()
+  final int pointsEarned;
 
   @override
   String toString() {
-    return 'TranslationItem(id: $id, sourceText: $sourceText, translatedText: $translatedText, sourceLanguage: $sourceLanguage, targetLanguage: $targetLanguage, timestamp: $timestamp, userId: $userId, imageUrl: $imageUrl)';
+    return 'TranslationItem(id: $id, sourceText: $sourceText, translatedText: $translatedText, sourceLanguage: $sourceLanguage, targetLanguage: $targetLanguage, timestamp: $timestamp, phoneticSpelling: $phoneticSpelling, contextSentenceOriginal: $contextSentenceOriginal, contextSentenceTranslated: $contextSentenceTranslated, userId: $userId, imageUrl: $imageUrl, audioUrl: $audioUrl, pointsEarned: $pointsEarned)';
   }
 
   @override
@@ -261,9 +342,25 @@ class _$TranslationItemImpl implements _TranslationItem {
                 other.targetLanguage == targetLanguage) &&
             (identical(other.timestamp, timestamp) ||
                 other.timestamp == timestamp) &&
+            (identical(other.phoneticSpelling, phoneticSpelling) ||
+                other.phoneticSpelling == phoneticSpelling) &&
+            (identical(
+                  other.contextSentenceOriginal,
+                  contextSentenceOriginal,
+                ) ||
+                other.contextSentenceOriginal == contextSentenceOriginal) &&
+            (identical(
+                  other.contextSentenceTranslated,
+                  contextSentenceTranslated,
+                ) ||
+                other.contextSentenceTranslated == contextSentenceTranslated) &&
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.imageUrl, imageUrl) ||
-                other.imageUrl == imageUrl));
+                other.imageUrl == imageUrl) &&
+            (identical(other.audioUrl, audioUrl) ||
+                other.audioUrl == audioUrl) &&
+            (identical(other.pointsEarned, pointsEarned) ||
+                other.pointsEarned == pointsEarned));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -276,8 +373,13 @@ class _$TranslationItemImpl implements _TranslationItem {
     sourceLanguage,
     targetLanguage,
     timestamp,
+    phoneticSpelling,
+    contextSentenceOriginal,
+    contextSentenceTranslated,
     userId,
     imageUrl,
+    audioUrl,
+    pointsEarned,
   );
 
   /// Create a copy of TranslationItem
@@ -305,8 +407,13 @@ abstract class _TranslationItem implements TranslationItem {
     required final String sourceLanguage,
     required final String targetLanguage,
     required final DateTime timestamp,
+    final String? phoneticSpelling,
+    final String? contextSentenceOriginal,
+    final String? contextSentenceTranslated,
     final String? userId,
     final String? imageUrl,
+    final String? audioUrl,
+    final int pointsEarned,
   }) = _$TranslationItemImpl;
 
   factory _TranslationItem.fromJson(Map<String, dynamic> json) =
@@ -325,9 +432,19 @@ abstract class _TranslationItem implements TranslationItem {
   @override
   DateTime get timestamp;
   @override
+  String? get phoneticSpelling;
+  @override
+  String? get contextSentenceOriginal;
+  @override
+  String? get contextSentenceTranslated;
+  @override
   String? get userId;
   @override
   String? get imageUrl;
+  @override
+  String? get audioUrl;
+  @override
+  int get pointsEarned;
 
   /// Create a copy of TranslationItem
   /// with the given fields replaced by the non-null parameter values.

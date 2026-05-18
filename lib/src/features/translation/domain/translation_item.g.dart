@@ -15,8 +15,13 @@ _$TranslationItemImpl _$$TranslationItemImplFromJson(
   sourceLanguage: json['sourceLanguage'] as String,
   targetLanguage: json['targetLanguage'] as String,
   timestamp: DateTime.parse(json['timestamp'] as String),
+  phoneticSpelling: json['phoneticSpelling'] as String?,
+  contextSentenceOriginal: json['contextSentenceOriginal'] as String?,
+  contextSentenceTranslated: json['contextSentenceTranslated'] as String?,
   userId: json['userId'] as String?,
   imageUrl: json['imageUrl'] as String?,
+  audioUrl: json['audioUrl'] as String?,
+  pointsEarned: (json['pointsEarned'] as num?)?.toInt() ?? 5,
 );
 
 Map<String, dynamic> _$$TranslationItemImplToJson(
@@ -28,6 +33,11 @@ Map<String, dynamic> _$$TranslationItemImplToJson(
   'sourceLanguage': instance.sourceLanguage,
   'targetLanguage': instance.targetLanguage,
   'timestamp': instance.timestamp.toIso8601String(),
+  'phoneticSpelling': instance.phoneticSpelling,
+  'contextSentenceOriginal': instance.contextSentenceOriginal,
+  'contextSentenceTranslated': instance.contextSentenceTranslated,
   'userId': instance.userId,
   'imageUrl': instance.imageUrl,
+  'audioUrl': instance.audioUrl,
+  'pointsEarned': instance.pointsEarned,
 };

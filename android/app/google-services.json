@@ -12,7 +12,20 @@
           "package_name": "com.EPICS"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "1073119278381-vlbo2ekdueehdhlkcu4db9ehimior5r3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.EPICS",
+            "certificate_hash": "52dfd837efa41fef737d0bd10d9b637f306d96fc"
+          }
+        },
+        {
+          "client_id": "1073119278381-pe1rkl9rc435372vda7b6f7c97v72ln3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCD7dHapOCxhXeMPmBdaOb8Xj_kbJZDLQw"
@@ -20,7 +33,63 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1073119278381-pe1rkl9rc435372vda7b6f7c97v72ln3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1073119278381-67vamnqou8a0nnsn8kfbio1i04nnkb20.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.linguabridge.linguabridge"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1073119278381:android:89b404936c00053c9ecfa4",
+        "android_client_info": {
+          "package_name": "com.linguabridge.linguabridge"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1073119278381-81rot2m0qh18s72oplb1nn9cm4smvdqc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.linguabridge.linguabridge",
+            "certificate_hash": "52dfd837efa41fef737d0bd10d9b637f306d96fc"
+          }
+        },
+        {
+          "client_id": "1073119278381-pe1rkl9rc435372vda7b6f7c97v72ln3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCD7dHapOCxhXeMPmBdaOb8Xj_kbJZDLQw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1073119278381-pe1rkl9rc435372vda7b6f7c97v72ln3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1073119278381-67vamnqou8a0nnsn8kfbio1i04nnkb20.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.linguabridge.linguabridge"
+              }
+            }
+          ]
         }
       }
     }
